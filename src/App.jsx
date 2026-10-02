@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Controls from './components/Controls';
 import GraphCanvas from './components/GraphCanvas';
 import ConsolePanel from './components/ConsolePanel';
-import { runBFS,runDFS, runDijkstra, clear_graph_data } from './utils/algoEngine';
+import { runBFS,runDFS, runDijkstra, clear_graph_data } from './utils/AlgoEngine';
 import './App.css';
 
 export default function App() {
