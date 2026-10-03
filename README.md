@@ -1,16 +1,51 @@
-# React + Vite
+# GraphViz.io — Interactive Graph Algorithm Visualizer
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Live Demo: https://graph-algo-visualizer-admz.vercel.app
 
-Currently, two official plugins are available:
+An interactive, web-based graph algorithm visualizer designed to demonstrate core pathfinding and traversal algorithms (BFS, DFS, Dijkstra) with real-time state visualization, step-by-step execution logs, and customizable graph topology.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Interactive Canvas Editor:**
+  - **Add Nodes & Edges:** Seamlessly create weighted/unweighted graph layouts.
+  - **Drag & Reposition:** Custom node placement for complex graph structures.
+  - **Start & Target Node Selectors:** Clearly defined source (S) and target (T) identifiers.
 
-## Expanding the Oxlint configuration
+- **Algorithms Supported:**
+  - **Breadth-First Search (BFS):** Unweighted shortest path traversal using queue operations.
+  - **Depth-First Search (DFS):** Complete graph exploration using stack recursion logic.
+  - **Dijkstra's Algorithm:** Weighted shortest path pathfinding with real-time edge relaxation logging.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- **Real-Time Visuals & Execution Console:**
+  - **Neon Path Highlighting:** Dynamic visual indication for active nodes, visited sets, and final shortest paths.
+  - **Live State Tracking:** Step-by-step tracking of active Queue/Stack contents and Visited Node Sets.
+  - **Detailed Logs:** Step-by-step edge relaxation formulas and distance updates.
+  - **Speed & Control:** Adjustable execution delay (ms) with play/pause/step functionality.
+
+---
+
+## Tech Stack
+
+- **Frontend Framework:** React.js (Bootstrapped with Vite)
+- **Styling:** CSS3 / Custom Modular CSS (Dark Theme with Neon Accents)
+- **State Management:** React Hooks (useState, useEffect, useRef)
+- **Deployment:** Vercel CI/CD Pipeline
+
+---
+
+## Getting Started Locally
+
+Follow these steps to run the project locally on your machine:
+
+### Prerequisites
+
+Ensure you have Node.js (v16+ recommended) and npm installed.
+
+### Installation
+
+1. Clone the Repository:
+   ```bash
+   git clone [https://github.com/ShivamIITDhCSE2029/graph-algo-visualizer.git](https://github.com/ShivamIITDhCSE2029/graph-algo-visualizer.git)
+   cd graph-algo-visualizer

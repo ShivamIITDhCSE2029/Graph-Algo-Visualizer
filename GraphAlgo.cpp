@@ -82,30 +82,23 @@ return display ;
 
 
 
+vector<int>display ;
 
-void DFS(int start ,int max){
-stack<int>Stack ;
-Stack.push(start) ;
-int visited[1001] = {0} ;
-
-visited[start] = 1 ;
-
-while(!Stack.empty()){
-  
-  int x = Stack.top() ;
-
-for(int i=0 ; i<=max ; i++){
-
-    if( matrix[x][i] && !visited[i] ){
-        Stack.push(i) ;
-        visited[i]  = 1; 
+void DFS(int start ,int max , vector<int>& visited){
+    
+    visited[start] = 1 ;
+    display.push_back(start) ;
+    int flag = 0 ;
+    for(int i=0 ; i<=max ; i++){
+      if(matrix[start][i] >0 && !visited[i])
+            DFS(i, max , visited) ;
+       }
+       return ;
     }
-}
-Stack.pop() ;
 
-}
 
-}
+
+
 
 
 int main(){

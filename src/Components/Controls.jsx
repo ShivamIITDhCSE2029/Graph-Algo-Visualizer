@@ -78,7 +78,7 @@ export default function Controls({
           <option value="bfs">Breadth-First Search (BFS)</option>
           <option value="dfs">Depth-First Search (DFS)</option>
           <option value="dijkstra">Dijkstra's Shortest Path</option>
-          <option value="pathfinding">A* Pathfinding</option>
+        
         </select>
       </div>
 

@@ -201,61 +201,44 @@ export function runDFS(start, destination = null) {
   const max = Node.length - 1;
   if (max < 0) return [];
 
-  const Stack = [];
-  const visited = new Array(1001).fill(0);
-
+  const visited = new Array(Node.length).fill(0);
   const display = [];
   const steps = [];
 
-  Stack.push(start);
-  visited[start] = 1;
+  const startInt = parseInt(start, 10);
 
-  steps.push({
-    current: start,
-    visited: [...display],
-    structure: [...Stack],
-    log: `Stack.push(${start}); visited[${start}] = 1;`,
-  });
-
-  while (Stack.length > 0) {
-    const x = Stack[Stack.length - 1];
-    display.push(x);
+  // Exact C++ Recursive DFS Logic adapted for steps tracking
+  function DFS(curr) {
+    visited[curr] = 1;
+    display.push(curr);
 
     steps.push({
-      current: x,
+      current: curr,
       visited: [...display],
-      structure: [...Stack],
-      log: `x = Stack.top() [${x}];`,
+      structure: [...display],
+      path: [],
+      log: `DFS: visited[${curr}] = 1; display.push_back(${curr});`
     });
 
-    if (destination !== null && x === destination) {
-      steps.push({
-        current: x,
-        visited: [...display],
-        structure: [...Stack],
-        log: `Target Node ${destination} Found!`,
-      });
-      break;
-    }
-
     for (let i = 0; i <= max; i++) {
-      if ( matrix[x][i] > 0 && visited[i] === 0 ) {
-        Stack.push(i);
-        visited[i] = 1;
-
-        steps.push({
-          current: i,
-          visited: [...display],
-          structure: [...Stack],
-          log: `matrix[${x}][${i}] exists -> Stack.push(${i}); visited[${i}] = 1;`,
-        });
+      if (matrix[curr] && matrix[curr][i] > 0 && !visited[i]) {
+        DFS(i);
       }
     }
-
-    Stack.pop();
   }
+
+  if (!isNaN(startInt) && startInt <= max) {
+    DFS(startInt);
+  }
+
+
+  steps.push({
+    current: null,
+    visited: [...display],
+    structure: [...display],
+    path: [],
+    log: `DFS Completed! Final Traversal Order (display): [ ${display.join(' -> ')} ]`
+  });
 
   return steps;
 }
-
-
