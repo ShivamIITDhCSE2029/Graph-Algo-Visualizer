@@ -1,5 +1,5 @@
 import React from 'react';
-import { add_node, add_edge } from '../utils/algoEngine';
+import { add_node, add_edge } from '../utils/AlgoEngine.js';
 
 export default function GraphCanvas({
   nodes,

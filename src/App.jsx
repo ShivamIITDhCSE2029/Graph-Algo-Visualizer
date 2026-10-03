@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Controls from './components/Controls';
-import GraphCanvas from './components/GraphCanvas';
-import ConsolePanel from './components/ConsolePanel';
+import Controls from './Components/Controls.jsx';
+import GraphCanvas from './Components/GraphCanvas.jsx';
+import ConsolePanel from './Components/ConsolePanel.jsx';
 import { runBFS,runDFS, runDijkstra, clear_graph_data } from './utils/AlgoEngine.js';
 import './App.css';
 
