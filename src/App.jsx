@@ -4,6 +4,7 @@ import GraphCanvas from './Components/GraphCanvas.jsx';
 import ConsolePanel from './Components/ConsolePanel.jsx';
 import { runBFS,runDFS, runDijkstra, clear_graph_data } from './utils/AlgoEngine.js';
 import './App.css';
+import DisclaimerModal from './Components/DisclaimerModal.jsx';
 
 export default function App() {
   const [nodes, setNodes] = useState([]);
@@ -99,6 +100,8 @@ let index = 0;
 
   return (
     <div className="app-container">
+    <DisclaimerModal />
+
       <Controls
         mode={mode}
         setMode={setMode}
