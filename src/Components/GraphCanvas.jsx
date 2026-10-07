@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { add_node, add_edge } from '../utils/AlgoEngine.js';
 
 export default function GraphCanvas({
@@ -17,6 +17,48 @@ export default function GraphCanvas({
   setTargetNode,
   shortestPath = []
 }) {
+  const [draggedNodeId, setDraggedNodeId] = useState(null);
+  const containerRef = useRef(null);
+
+  // 1. Dragging Handlers for Move Mode
+  const handleNodeMouseDown = (e, nodeId) => {
+    if (mode === 'move') {
+      e.stopPropagation();
+      setDraggedNodeId(nodeId);
+    }
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (draggedNodeId === null || mode !== 'move' || !containerRef.current) return;
+
+      const rect = containerRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      setNodes((prevNodes) =>
+        prevNodes.map((node) =>
+          node.id === draggedNodeId ? { ...node, x, y } : node
+        )
+      );
+    };
+
+    const handleMouseUp = () => {
+      setDraggedNodeId(null);
+    };
+
+    if (draggedNodeId !== null) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+    }
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [draggedNodeId, mode, setNodes]);
+
+  // 2. Add Node Logic
   const handleCanvasClick = (e) => {
     if (mode !== 'node') return;
     const rect = e.currentTarget.getBoundingClientRect();
@@ -31,6 +73,7 @@ export default function GraphCanvas({
     setNodes((prev) => [...prev, { id: newNodeId, x, y }]);
   };
 
+  // 3. Add Edge / Select Node Logic
   const handleNodeClick = (e, nodeId) => {
     e.stopPropagation();
 
@@ -88,6 +131,7 @@ export default function GraphCanvas({
 
   return (
     <div
+      ref={containerRef}
       className="canvas-wrapper"
       onClick={handleCanvasClick}
       onContextMenu={(e) => e.preventDefault()}
@@ -156,6 +200,8 @@ export default function GraphCanvas({
             <g
               key={node.id}
               className="node-group"
+              style={{ cursor: mode === 'move' ? 'grab' : 'pointer' }}
+              onMouseDown={(e) => handleNodeMouseDown(e, node.id)}
               onClick={(e) => handleNodeClick(e, node.id)}
               onContextMenu={(e) => handleNodeContextMenu(e, node.id)}
             >
